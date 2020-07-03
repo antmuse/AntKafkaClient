@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Include\Kafka">
+      <UniqueIdentifier>{83bd0c2e-382a-4357-96af-91cb3b815158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Kafka">
+      <UniqueIdentifier>{6c6760d2-9972-4c2b-881b-7751c8261bad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\HConfig.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKPartitionCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKConfig.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKEventCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKProducter.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKConsummer.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKDeliverCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKConsumeCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKOffsetCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Kafka\CKFKRebalanceCallback.h">
+      <Filter>Include\Kafka</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Kafka\CKFKPartitionCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKConfig.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKEventCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKProducter.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKConsummer.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKDeliverCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKConsumeCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKOffsetCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Kafka\CKFKRebalanceCallback.cpp">
+      <Filter>Source\Kafka</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

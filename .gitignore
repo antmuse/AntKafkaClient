@@ -1,0 +1,13 @@
+# paths
+Build/ipch/
+Build/.vs/
+Build/Temp/
+Build/Debug/
+Lib/
+Bin/
+
+
+# files
+Build/*.db
+Build/*.opendb
+
