@@ -1,0 +1,122 @@
+//Config Kafka, G=global, T=topic, P=producter, C=consume
+{
+    "kafka_base":{
+        "metadata.broker.list" : "10.1.63.126:9092,10.1.63.127:9092,10.1.63.128:9092",
+        "message.max.bytes" : "51200",
+        "message.copy.max.bytes" : "51200",
+        "metadata.request.timeout.ms" : "20000",
+
+        //"max.in.flight.requests.per.connection" : "1000000",
+        "max.in.flight" : "3",
+
+        //@G,range[1,300000],default=100
+        "retry.backoff.ms" : "100",
+
+        //@G,
+        "socket.blocking.max.ms" : "1000",
+
+        //@G,
+        "socket.timeout.ms" : "30000",
+
+        //@G,socket send cache 16K, system default is used if 0.
+        "socket.send.buffer.bytes" : "16384",
+
+        //@G,socket receive cache 16K, system default is used if 0.
+        "socket.receive.buffer.bytes" : "16384",
+
+        //@G,range[0,1]
+        "socket.nagle.disable" : "1",
+
+        //@G,range[0,1]
+        "socket.keepalive.enable" : "1",
+
+        //@G,range[v4,v6,any]
+        "broker.address.family" : "any",
+
+        //@G,range[0,1]
+        "enable.auto.commit" : "1",
+
+        //@G,Group session keepalive heartbeat interval.
+        "heartbeat.interval.ms" : "40000",
+
+        "log.connection.close" : "false",
+
+        //@G,range[0,1]
+        "log.thread.name" : "1"
+
+        //@G, range[all,broker,...]
+        //"debug" : "broker"
+    },
+
+    "kafka_topic": {
+        //@TP, range[random, consistent, consistent_random, murmur2, murmur2_random]
+        "partitioner" : "random"
+    },
+
+    "kafka_produce": {
+        //@P,Maximum number of messages allowed on the producer queue.
+        "queue.buffering.max.messages" : "2000",
+        "queue.buffering.max.ms" : "10",
+
+        //@TP, range[0,10000000]
+        "message.send.max.retries" : "10",
+
+        "batch.num.messages" : "100",
+
+        //@ 0：这意味着生产者producer不等待来自broker同步完成的确认继续发送下一条（批）消息。
+        //@ 1：这意味着producer在leader已成功收到的数据并得到确认后发送下一条message。
+        //@-1：这意味着producer在follower副本确认接收到数据后才算一次发送完成。 保证没有信息将丢失。
+        //@range[0,1,-1]三种机制，性能依次递减 (producer吞吐量降低)，数据健壮性则依次递增。
+        "request.required.acks": "1",
+
+        //@TP, range[lifo,fifo]
+        "queuing.strategy" : "fifo",
+
+        "socket.max.fails" : "2",
+
+        //@GP, range[0,1],Only provide delivery reports for failed messages.
+        "delivery.report.only.error" : "1",
+
+        //@TP, range[0,900000]A time of 0 is infinite
+        "message.timeout.ms" : "30000"
+    },
+
+    "kafka_consume" : {
+        "queued.min.messages" : "1000",
+
+        "partition.assignment.strategy" : "roundrobin",
+
+        //@TC,range[0,1]
+        "auto.commit.enable" : "1",
+
+        //@TC,range[10,86400000]
+        "auto.commit.interval.ms" : "10000",
+
+        //@TC,range[smallest,earliest,beginning,largest,latest,end,error]
+        "auto.offset.reset" : "latest",
+
+        //@TC,
+        "offset.store.path": "./kfk_offset",
+
+        //@TC,
+        "offset.store.sync.interval.ms": "5000",
+
+        //@TC,range[0,1000000]
+        "consume.callback.max.messages": "2000",
+
+        "fetch.max.bytes" : "100000",
+
+        //`receive.message.max.bytes` must be >= `fetch.max.bytes` + 512
+        "receive.message.max.bytes" : "102400",
+
+        "group.id" : "goter"
+    },
+
+
+    "topic_send" : "0.0.0.0.kfk",
+    "topic_receive" : "0.0.0.0.kfk",
+    "topic_group" : "goter",
+
+    // range[0:debug,1:INFO, 2:WARN, 3:ERROR, 4:CRITCAL]
+    "log_level" : 1
+}
