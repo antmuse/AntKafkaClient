@@ -50,7 +50,7 @@ void AppStartKafkaSend() {
     Json::CharReaderBuilder builder;
     builder["collectComments"] = true;
     JSONCPP_STRING errs;
-    if (!parseFromStream(builder, ifs, &root, &errs)) {
+    if(!parseFromStream(builder, ifs, &root, &errs)) {
         std::cout << errs << std::endl;
         return;
     }
@@ -63,21 +63,21 @@ void AppStartKafkaSend() {
 
     Json::Value& kbase = root["kafka_base"];
     std::vector<Json::String> pat = kbase.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfg.set(pat[i].c_str(), kbase[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), kbase[pat[i]].asCString());
     }
 
     Json::Value& kprod = root["kafka_produce"];
     pat = kprod.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfg.set(pat[i].c_str(), kprod[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), kprod[pat[i]].asCString());
     }
 
     Json::Value& ktopc = root["kafka_topic"];
     pat = ktopc.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfgtopic.set(pat[i].c_str(), ktopc[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), ktopc[pat[i]].asCString());
     }
@@ -90,22 +90,22 @@ void AppStartKafkaSend() {
     tmanager.getTimeWheel().add(producter.getTimeNode(), 1000, -1);
 
     std::string kfktopic(root["topic_send"].asCString());
-    if (net::EKFK_SUCCESS != producter.init(kfktopic.c_str())) {
+    if(net::EKFK_SUCCESS != producter.init(kfktopic.c_str())) {
         printf("AppStartKafkaSend>> @producer init failed\n");
         return;
     }
     s32 allsent = 0;
     s32 tmp;
 
-APP_GOTO_AUTO:
+    APP_GOTO_AUTO:
     printf("AppStartKafkaSend>> @start auto send style, how many msg should be sent out ?\n");
     scanf("%d", &tmp);
     s8 msgbuffer[1024];
     ::strcpy(msgbuffer, "auto style: counter's buffer.");
 
     lastime = CTimer::getTime();
-    for (s32 i = 0; i < tmp; ) {
-        if (net::EKFK_SUCCESS == producter.sendBuffer(msgbuffer, 512)) {
+    for(s32 i = 0; i < tmp; ) {
+        if(net::EKFK_SUCCESS == producter.sendBuffer(msgbuffer, 512)) {
             ++i;
             ++allsent;
         } else {
@@ -127,22 +127,22 @@ APP_GOTO_AUTO:
     printf("AppStartKafkaSend>> @start manual send style, pls go on.\n\n");
 
 
-    while (::fgets(msgbuffer, sizeof(msgbuffer), stdin)) {
-        if ('*' == *msgbuffer) {//exit
+    while(::fgets(msgbuffer, sizeof(msgbuffer), stdin)) {
+        if('*' == *msgbuffer) {//exit
             break;
         }
-        if ('@' == *msgbuffer) {//change style
+        if('@' == *msgbuffer) {//change style
             goto APP_GOTO_AUTO;
         }
         size_t len = ::strlen(msgbuffer);
-        if (1 == len) {
+        if(1 == len) {
             printf("AppStartKafkaSend>> @auto send result = %u\n", allsent);
             continue;
         }
-        if (msgbuffer[len - 1] == '\n') {
+        if(msgbuffer[len - 1] == '\n') {
             msgbuffer[len - 1] = '\0';
         }
-        if (net::EKFK_SUCCESS != producter.sendBuffer(msgbuffer, len)) {
+        if(net::EKFK_SUCCESS != producter.sendBuffer(msgbuffer, len)) {
             printf("AppStartKafkaSend>> @push data failed %s\n", msgbuffer);
         } else {
             allsent++;
@@ -167,7 +167,7 @@ void AppStartKafkaReceive() {
     Json::CharReaderBuilder builder;
     builder["collectComments"] = true;
     JSONCPP_STRING errs;
-    if (!parseFromStream(builder, ifs, &root, &errs)) {
+    if(!parseFromStream(builder, ifs, &root, &errs)) {
         std::cout << errs << std::endl;
         return;
     }
@@ -180,21 +180,21 @@ void AppStartKafkaReceive() {
 
     Json::Value& kbase = root["kafka_base"];
     std::vector<Json::String> pat = kbase.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfg.set(pat[i].c_str(), kbase[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), kbase[pat[i]].asCString());
     }
 
     Json::Value& kprod = root["kafka_consume"];
     pat = kprod.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfg.set(pat[i].c_str(), kprod[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), kprod[pat[i]].asCString());
     }
 
     Json::Value& ktopc = root["kafka_topic"];
     pat = ktopc.getMemberNames();
-    for (s32 i = pat.size() - 1; i >= 0; --i) {
+    for(s32 i = pat.size() - 1; i >= 0; --i) {
         cfgtopic.set(pat[i].c_str(), ktopc[pat[i]].asCString());
         printf("%s---%s\n", pat[i].c_str(), ktopc[pat[i]].asCString());
     }
@@ -208,7 +208,7 @@ void AppStartKafkaReceive() {
 
     std::string kfktopic(root["topic_receive"].asCString());
     std::string kgroup(root["topic_group"].asCString());
-    if (!consummer.init(kfktopic.c_str())) {
+    if(!consummer.init(kfktopic.c_str())) {
         printf("AppStartKafkaReceive>> @init failed\n");
         return;
     }
@@ -218,10 +218,10 @@ void AppStartKafkaReceive() {
     s32 cnt = 0;
     s32 timeout = 0;
 
-    while ((!_kbhit() || _getch() != 27)) {
+    while((!_kbhit() || _getch() != 27)) {
         RdKafka::Message* msg = consummer.read(timeout);
         red = msg && RdKafka::ERR_NO_ERROR == msg->err();
-        if (red) {
+        if(red) {
             printf("read[%d]=%.*s\n", ++cnt, (s32)msg->len(), (s8*)msg->payload());
             timeout = 0;
         } else {
@@ -264,7 +264,7 @@ int main(int argc, char** argv) {
     //return 0;
 
 
-    app::CLogger::getInstance().addReceiver(app::CLogger::ELRT_FILE_HTML);
+    app::CLogger::getInstance().addReceiver(app::CLogger::ELRT_CONSOLE | app::CLogger::ELRT_FILE_HTML);
     //app::AppWriteJson();
 
     //app::AppStartKafkaSend();

@@ -13,9 +13,6 @@
         "retry.backoff.ms" : "100",
 
         //@G,
-        "socket.blocking.max.ms" : "1000",
-
-        //@G,
         "socket.timeout.ms" : "30000",
 
         //@G,socket send cache 16K, system default is used if 0.
@@ -37,7 +34,7 @@
         "enable.auto.commit" : "1",
 
         //@G,Group session keepalive heartbeat interval.
-        "heartbeat.interval.ms" : "40000",
+        "heartbeat.interval.ms" : "5000",
 
         "log.connection.close" : "false",
 
@@ -69,7 +66,7 @@
         //@range[0,1,-1]三种机制，性能依次递减 (producer吞吐量降低)，数据健壮性则依次递增。
         "request.required.acks": "1",
 
-        //@TP, range[lifo,fifo]
+        //@TP, range[lifo,fifo],实验性配置项
         "queuing.strategy" : "fifo",
 
         "socket.max.fails" : "2",

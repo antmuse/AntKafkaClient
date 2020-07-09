@@ -60,7 +60,7 @@ s32 CKFKProducter::init(const s8* topic) {
         CLogger::logError("CKFKProducter::init", "setEventCallback=%d", ret);
         return false;
     }
-    ret = mConfig.setPartitionCallback(mPartitioner);
+    ret = mConfigTopic.setPartitionCallback(mPartitioner);
     if (0 != ret) {
         CLogger::logError("CKFKProducter::init", "setPartitionCallback=%d", ret);
         return false;
